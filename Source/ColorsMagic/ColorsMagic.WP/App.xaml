@@ -6,5 +6,6 @@
     xmlns:screens="using:ColorsMagic.WP.Screens">
     <Application.Resources>
         <screens:GameViewModel x:Name="GameViewController"/>
+        <screens:LoadingViewModel x:Name="LoadingViewModel"/>
     </Application.Resources>
 </Application>

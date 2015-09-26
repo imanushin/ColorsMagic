@@ -83,6 +83,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Common\Logger.cs" />
+    <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Common\TaskHelpers.cs" />
     <Compile Include="GameModel\GamePosition.cs" />
     <Compile Include="GameModel\PositionHelper.cs" />
@@ -94,6 +95,10 @@
       <DependentUpon>GameView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Screens\GameViewModel.cs" />
+    <Compile Include="Screens\LoadingView.xaml.cs">
+      <DependentUpon>LoadingView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\LoadingViewModel.cs" />
     <Compile Include="Screens\ViewModels.cs" />
     <Compile Include="Settings\GameColor.cs" />
     <Compile Include="Settings\GameLevel.cs" />
@@ -127,6 +132,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Screens\LoadingView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="JetBrains.Annotations.PCL328, Version=9.2.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
@@ -137,7 +146,11 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <SDKReference Include="BehaviorsXamlSDKManaged, Version=12.0">
+      <Name>Behaviors SDK %28XAML%29</Name>
+    </SDKReference>
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
   </PropertyGroup>
