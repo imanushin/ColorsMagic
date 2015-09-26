@@ -83,7 +83,9 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Common\Logger.cs" />
+    <Compile Include="Common\NavigationService.cs" />
     <Compile Include="Common\RelayCommand.cs" />
+    <Compile Include="Common\TaskCommand.cs" />
     <Compile Include="Common\TaskHelpers.cs" />
     <Compile Include="GameModel\GamePosition.cs" />
     <Compile Include="GameModel\PositionHelper.cs" />

@@ -10,20 +10,13 @@ namespace ColorsMagic.WP.Screens
     {
         public string LoadingText { get; } = "Loading...";
 
-        public ICommand LoadingCommand
-        {
-            get
-            {
-                return new RelayCommand<object>(o =>
-{
-    OpenFirstPageAsync().SuppressExceptions();
-});
-            }
-        }
+        public ICommand LoadingCommand => new TaskCommand(OpenFirstPageAsync);
 
-        private async Task OpenFirstPageAsync()
+        private static async Task OpenFirstPageAsync()
         {
-            
+            await ViewModels.GameViewModel.InitGameAsync().ConfigureAwait(true);
+
+            NavigationService.Instance.Navigate(typeof(GameView));
         }
     }
 }

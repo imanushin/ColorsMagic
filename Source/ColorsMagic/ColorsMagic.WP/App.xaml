@@ -5,7 +5,7 @@
     xmlns:local="using:ColorsMagic.WP"
     xmlns:screens="using:ColorsMagic.WP.Screens">
     <Application.Resources>
-        <screens:GameViewModel x:Name="GameViewController"/>
+        <screens:GameViewModel x:Name="GameViewModel"/>
         <screens:LoadingViewModel x:Name="LoadingViewModel"/>
     </Application.Resources>
 </Application>

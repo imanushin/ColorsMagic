@@ -10,13 +10,13 @@ namespace ColorsMagic.WP.Screens
 
         public async Task InitGameAsync()
         {
-            _settings = await SettingsManager.Instance.GetCurrentData().ConfigureAwait(false);
+            _settings = await SettingsManager.Instance.GetCurrentData().ConfigureAwait(true);
 
             if (ReferenceEquals(_settings.CurrentGame, null))
             {
                 _settings.CurrentGame = CreateNewGame();
 
-                await SettingsManager.Instance.SaveCurrentAsync();
+                await SettingsManager.Instance.SaveCurrentAsync().ConfigureAwait(true);
             }
 
         }

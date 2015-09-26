@@ -8,6 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 using Windows.Storage;
+using Windows.Storage.Search;
 using JetBrains.Annotations;
 
 namespace ColorsMagic.WP.Settings
@@ -19,6 +20,7 @@ namespace ColorsMagic.WP.Settings
         public static readonly SettingsManager Instance = new SettingsManager();
 
         private static readonly XmlSerializer Serializer = new XmlSerializer(typeof(ProgramData));
+        private static readonly StorageFolder SettingsFolder = ApplicationData.Current.RoamingFolder;
 
         private ProgramData _currentSettings = new ProgramData();
 
@@ -29,36 +31,31 @@ namespace ColorsMagic.WP.Settings
         [ItemNotNull]
         public async Task<ProgramData> GetCurrentData()
         {
-            var settingsFile = await GetSettingsFile().ConfigureAwait(false);
+            var allFiles = await SettingsFolder.GetFilesAsync();
 
-            if (ReferenceEquals(settingsFile, null))
+            if (!allFiles.Any(sf => string.Equals(sf.Name, SettingsFileName, StringComparison.Ordinal)))
             {
                 _currentSettings = new ProgramData();
 
                 return _currentSettings;
             }
 
+            var settingsFile = await SettingsFolder.GetFileAsync(SettingsFileName);
+
             using (var fileStream = await settingsFile.OpenReadAsync())
             {
                 using (var stream = fileStream.AsStreamForRead())
                 {
-                    _currentSettings = (ProgramData) Serializer.Deserialize(stream);
+                    _currentSettings = (ProgramData)Serializer.Deserialize(stream);
                 }
 
                 return _currentSettings;
             }
         }
 
-        private static async Task<StorageFile> GetSettingsFile()
-        {
-            var appRoamingFolder = ApplicationData.Current.RoamingFolder;
-
-            return await appRoamingFolder.GetFileAsync(SettingsFileName);
-        }
-
         public async Task SaveCurrentAsync()
         {
-            var settingsFile = await GetSettingsFile().ConfigureAwait(false);
+            var settingsFile = await SettingsFolder.CreateFileAsync(SettingsFileName, CreationCollisionOption.ReplaceExisting);
 
             using (var fileStream = await settingsFile.OpenTransactedWriteAsync())
             {

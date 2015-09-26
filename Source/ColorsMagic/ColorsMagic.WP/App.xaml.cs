@@ -8,6 +8,7 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Phone.UI.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -40,15 +41,27 @@ namespace ColorsMagic.WP
             this.InitializeComponent();
             this.Suspending += this.OnSuspending;
             this.UnhandledException += OnUnhandledException;
+
+#if WINDOWS_PHONE_APP
+            HardwareButtons.BackPressed += HardwareButtons_BackPressed;
+#endif
         }
 
+
+#if WINDOWS_PHONE_APP
+        private static void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
+        {
+            NavigationService.Instance.GoBack();
+
+            e.Handled = true;
+        }
+#endif
         private static void OnUnhandledException(object sender, UnhandledExceptionEventArgs unhandledExceptionEventArgs)
         {
             Logger.LogError("Unhandled exception ({0}): {1}", unhandledExceptionEventArgs.Message,
                 unhandledExceptionEventArgs.Exception);
 
             unhandledExceptionEventArgs.Handled = true;
-
         }
 
         /// <summary>
