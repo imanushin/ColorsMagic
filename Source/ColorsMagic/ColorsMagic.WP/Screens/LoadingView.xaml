@@ -18,7 +18,13 @@
     </i:Interaction.Behaviors>
 
     <Grid>
+        <ProgressBar 
+            VerticalAlignment="Top" 
+            HorizontalAlignment="Stretch"
+            IsIndeterminate="True"/>
         <TextBlock 
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
             Text="{Binding LoadingText}"
             FontSize="{StaticResource TextStyleExtraLargeFontSize}"/>
     </Grid>
