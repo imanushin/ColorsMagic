@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
@@ -15,6 +16,9 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
+using ColorsMagic.WP.Common;
+using ColorsMagic.WP.Screens;
+using ColorsMagic.WP.Settings;
 
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=391641
 
@@ -25,7 +29,7 @@ namespace ColorsMagic.WP
     /// </summary>
     public sealed partial class App : Application
     {
-        private TransitionCollection transitions;
+        private TransitionCollection _transitions;
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
@@ -45,14 +49,20 @@ namespace ColorsMagic.WP
         /// <param name="e">Details about the launch request and process.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
+            var openPageTask = OpenFirstPageAsync(e);
+
+            openPageTask.SuppressExceptions();
+        }
+
+        private async Task OpenFirstPageAsync(LaunchActivatedEventArgs launchActivatedEventArgs)
+        {
 #if DEBUG
             if (System.Diagnostics.Debugger.IsAttached)
             {
                 this.DebugSettings.EnableFrameRateCounter = true;
             }
 #endif
-
-            Frame rootFrame = Window.Current.Content as Frame;
+            var rootFrame = Window.Current.Content as Frame;
 
             // Do not repeat app initialization when the Window already has content,
             // just ensure that the window is active
@@ -67,7 +77,7 @@ namespace ColorsMagic.WP
                 // Set the default language
                 rootFrame.Language = Windows.Globalization.ApplicationLanguages.Languages[0];
 
-                if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
+                if (launchActivatedEventArgs.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
                     // TODO: Load state from previously suspended application
                 }
@@ -76,15 +86,19 @@ namespace ColorsMagic.WP
                 Window.Current.Content = rootFrame;
             }
 
+            var gameSettings = await SettingsManager.Instance.GetCurrentData().ConfigureAwait(true);
+
+            await ViewModels.GameViewModel.InitGameAsync().ConfigureAwait(true);
+
             if (rootFrame.Content == null)
             {
                 // Removes the turnstile navigation for startup.
                 if (rootFrame.ContentTransitions != null)
                 {
-                    this.transitions = new TransitionCollection();
+                    this._transitions = new TransitionCollection();
                     foreach (var c in rootFrame.ContentTransitions)
                     {
-                        this.transitions.Add(c);
+                        this._transitions.Add(c);
                     }
                 }
 
@@ -94,7 +108,7 @@ namespace ColorsMagic.WP
                 // When the navigation stack isn't restored navigate to the first page,
                 // configuring the new page by passing required information as a navigation
                 // parameter
-                if (!rootFrame.Navigate(typeof(MainPage), e.Arguments))
+                if (!rootFrame.Navigate(typeof(GameView), launchActivatedEventArgs.Arguments))
                 {
                     throw new Exception("Failed to create initial page");
                 }
@@ -112,7 +126,7 @@ namespace ColorsMagic.WP
         private void RootFrame_FirstNavigated(object sender, NavigationEventArgs e)
         {
             var rootFrame = sender as Frame;
-            rootFrame.ContentTransitions = this.transitions ?? new TransitionCollection() { new NavigationThemeTransition() };
+            rootFrame.ContentTransitions = this._transitions ?? new TransitionCollection() { new NavigationThemeTransition() };
             rootFrame.Navigated -= this.RootFrame_FirstNavigated;
         }
 

@@ -2,6 +2,9 @@
     x:Class="ColorsMagic.WP.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:ColorsMagic.WP">
-
+    xmlns:local="using:ColorsMagic.WP"
+    xmlns:screens="using:ColorsMagic.WP.Screens">
+    <Application.Resources>
+        <screens:GameViewModel x:Name="GameViewController"/>
+    </Application.Resources>
 </Application>
