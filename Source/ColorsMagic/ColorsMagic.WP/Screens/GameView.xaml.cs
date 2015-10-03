@@ -51,7 +51,7 @@ namespace ColorsMagic.WP.Screens
 
             for (var index = 0; index < colorsCount; index++)
             {
-                var position = PositionHelper.GetTrianglePosition(colorsCount, index);
+                var position = PositionHelper.GetTrianglePosition(index);
 
                 var rowIndex = position.Row;
                 var columnIndex = position.Column * 2 + 1;

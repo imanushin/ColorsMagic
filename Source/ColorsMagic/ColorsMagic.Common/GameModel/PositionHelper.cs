@@ -44,11 +44,9 @@ namespace ColorsMagic.Common.GameModel
             }
         }
 
-        public static TrianglePosition GetTrianglePosition(int colorsCount, int index)
+        public static TrianglePosition GetTrianglePosition(int index)
         {
-            var size = GetMaxTriangleSize(colorsCount);
-
-            var row = GetMaxTriangleSize(index) - 1;
+            var row = GetMaxTriangleSize(index);
             var column = index - GetCellsCount(row);
 
             return new TrianglePosition(row, column);
