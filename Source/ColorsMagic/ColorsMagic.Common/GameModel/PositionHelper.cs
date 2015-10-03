@@ -6,17 +6,24 @@ namespace ColorsMagic.Common.GameModel
     {
         public static int GetCellsCount(int triangleSize)
         {
-            return ((2 + triangleSize - 1) * triangleSize) / 2;
+            return ((triangleSize + 1) * triangleSize) / 2;
         }
 
-        public static int GetTriangleSize(int colorsCount)
+        public static int GetMaxTriangleSize(int colorsCount)
         {
-            return (int)Math.Sqrt(colorsCount / 2) + 1;
+            var result = 0;
+
+            while (GetCellsCount(result) <= colorsCount)
+            {
+                result++;
+            }
+
+            return result - 1;
         }
 
         public static int GetPosition(int colorsCount, GamePosition position)
         {
-            var size = GetTriangleSize(colorsCount);
+            var size = GetMaxTriangleSize(colorsCount);
 
             switch (position)
             {
@@ -39,9 +46,9 @@ namespace ColorsMagic.Common.GameModel
 
         public static TrianglePosition GetTrianglePosition(int colorsCount, int index)
         {
-            var size = GetTriangleSize(colorsCount);
+            var size = GetMaxTriangleSize(colorsCount);
 
-            var row = GetTriangleSize(index) - 1;
+            var row = GetMaxTriangleSize(index) - 1;
             var column = index - GetCellsCount(row);
 
             return new TrianglePosition(row, column);

@@ -45,7 +45,7 @@ namespace ColorsMagic.WP.Screens
         {
             gameGrid.Children.Clear();
 
-            var triangleSize = PositionHelper.GetTriangleSize(gameColors.Length);
+            var triangleSize = PositionHelper.GetMaxTriangleSize(gameColors.Length);
 
             var colorsCount = gameColors.Length;
 
@@ -76,7 +76,7 @@ namespace ColorsMagic.WP.Screens
             gameGrid.RowDefinitions.Clear();
             gameGrid.ColumnDefinitions.Clear();
 
-            var triangleSize = PositionHelper.GetTriangleSize(gameColors.Length);
+            var triangleSize = PositionHelper.GetMaxTriangleSize(gameColors.Length);
 
             var newRows = Enumerable.Range(0, triangleSize).Select(i => CreateNewRow()).ToArray();
 
