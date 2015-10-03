@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading.Tasks;
 using ColorsMagic.WP.GameModel;
 using ColorsMagic.WP.Settings;
 
@@ -7,6 +9,8 @@ namespace ColorsMagic.WP.Screens
     public sealed class GameViewModel
     {
         private ProgramData _settings;
+
+        public GameColorViewModel[] GameColors { get; private set; } = new GameColorViewModel[0];
 
         public async Task InitGameAsync()
         {
@@ -19,6 +23,8 @@ namespace ColorsMagic.WP.Screens
                 await SettingsManager.Instance.SaveCurrentAsync().ConfigureAwait(true);
             }
 
+            var gameColors = _settings.CurrentGame.Colors;
+            GameColors = gameColors.Select((v, i) => new GameColorViewModel(gameColors, i)).ToArray();
         }
 
         private GameData CreateNewGame()

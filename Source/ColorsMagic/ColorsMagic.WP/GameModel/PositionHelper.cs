@@ -41,5 +41,15 @@ namespace ColorsMagic.WP.GameModel
                     throw new ArgumentOutOfRangeException(nameof(position), position, null);
             }
         }
+
+        public static TrianglePosition GetTrianglePosition(int colorsCount, int index)
+        {
+            var size = GetTriangleSize(colorsCount);
+
+            var row = GetTriangleSize(index) - 1;
+            var column = index - GetCellsCount(row);
+
+            return new TrianglePosition(row, column);
+        }
     }
 }

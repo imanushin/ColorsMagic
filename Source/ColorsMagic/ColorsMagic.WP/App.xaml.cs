@@ -9,6 +9,7 @@ using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Phone.UI.Input;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -56,12 +57,20 @@ namespace ColorsMagic.WP
             e.Handled = true;
         }
 #endif
-        private static void OnUnhandledException(object sender, UnhandledExceptionEventArgs unhandledExceptionEventArgs)
+        private static async void OnUnhandledException(object sender, UnhandledExceptionEventArgs unhandledExceptionEventArgs)
         {
             Logger.LogError("Unhandled exception ({0}): {1}", unhandledExceptionEventArgs.Message,
                 unhandledExceptionEventArgs.Exception);
 
             unhandledExceptionEventArgs.Handled = true;
+
+            await Task.Delay(0).ConfigureAwait(true);
+
+#if DEBUG
+            var dialog = new MessageDialog("Error:" + unhandledExceptionEventArgs.Message);
+
+            await dialog.ShowAsync();
+#endif
         }
 
         /// <summary>

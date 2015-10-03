@@ -6,9 +6,24 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    xmlns:i="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    Loaded="GameView_OnLoaded">
+    <i:Interaction.Behaviors>
 
+    </i:Interaction.Behaviors>
+    
+    <Page.Resources>
+        <Style x:Name="CellStyle" 
+               TargetType="Ellipse"
+               d:DataContext="GameColorViewModel">
+        </Style>
+    </Page.Resources>
+    
     <Grid>
-
+        <Grid Name="GameGrid">
+            
+        </Grid>
     </Grid>
 </Page>

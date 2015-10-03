@@ -89,10 +89,12 @@
     <Compile Include="Common\TaskHelpers.cs" />
     <Compile Include="GameModel\GamePosition.cs" />
     <Compile Include="GameModel\PositionHelper.cs" />
+    <Compile Include="GameModel\TrianglePosition.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Screens\GameColorViewModel.cs" />
     <Compile Include="Screens\GameView.xaml.cs">
       <DependentUpon>GameView.xaml</DependentUpon>
     </Compile>
