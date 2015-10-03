@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
-using ColorsMagic.WP.GameModel;
+using ColorsMagic.Common.GameModel;
 using ColorsMagic.WP.Settings;
 
 namespace ColorsMagic.WP.Screens

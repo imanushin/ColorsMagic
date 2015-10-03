@@ -1,4 +1,4 @@
-﻿namespace ColorsMagic.WP.GameModel
+﻿namespace ColorsMagic.Common.GameModel
 {
     public enum GamePosition
     {

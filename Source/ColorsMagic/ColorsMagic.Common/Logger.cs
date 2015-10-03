@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using JetBrains.Annotations;
+﻿using JetBrains.Annotations;
 
-namespace ColorsMagic.WP.Common
+namespace ColorsMagic.Common
 {
     public static class Logger
     {

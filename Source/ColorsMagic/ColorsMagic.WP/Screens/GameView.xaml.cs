@@ -14,7 +14,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Shapes;
-using ColorsMagic.WP.GameModel;
+using ColorsMagic.Common.GameModel;
 
 namespace ColorsMagic.WP.Screens
 {
