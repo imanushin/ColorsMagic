@@ -6,7 +6,7 @@ namespace ColorsMagic.Common.GameModel
     {
         public static int GetCellsCount(int triangleSize)
         {
-            return 2 * triangleSize * (triangleSize - 1);
+            return ((2 + triangleSize - 1) * triangleSize) / 2;
         }
 
         public static int GetTriangleSize(int colorsCount)
