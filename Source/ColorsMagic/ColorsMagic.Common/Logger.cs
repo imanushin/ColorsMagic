@@ -7,7 +7,7 @@ using JetBrains.Annotations;
 
 namespace ColorsMagic.WP.Common
 {
-    internal static class Logger
+    public static class Logger
     {
         [StringFormatMethod("errorFormat")]
         public static void LogError(string errorFormat, params object[] args)

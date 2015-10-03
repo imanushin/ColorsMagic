@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ColorsMagic.WP.Settings;
 
 namespace ColorsMagic.WP.GameModel
 {
-    internal static class PositionHelper
+    public static class PositionHelper
     {
         public static int GetCellsCount(int triangleSize)
         {
