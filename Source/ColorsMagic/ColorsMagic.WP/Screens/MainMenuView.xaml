@@ -15,12 +15,26 @@
             VerticalAlignment="Center" 
             HorizontalAlignment="Center">
             <Button 
+                HorizontalAlignment="Stretch"
                 Content="{Binding ContinueGameText}"
-                Visibility="{Binding ContinueGameVisible}"/>
-            
-            <Button Content="{Binding CreateNewGameText}"/>
-            
-            <Button Content="{Binding BuyFullVersionText}"/>
+                Visibility="{Binding ContinueGameVisible}"
+                Command="{Binding ContinueGameCommand}"/>
+
+            <Button 
+                HorizontalAlignment="Stretch"
+                Content="{Binding CreateNewGameText}"
+                Command="{Binding CreateNewGameCommand}"/>
+
+            <Button 
+                Content="{Binding AboutText}"
+                HorizontalAlignment="Stretch"
+                Command="{Binding AboutCommand}"/>
+
+            <Button 
+                Content="{Binding BuyFullVersionText}"
+                Command="{Binding BuyFullVersionCommand}"
+                HorizontalAlignment="Stretch"
+                Visibility="{Binding BuyFullVersionVisible}"/>
         </StackPanel>
     </Grid>
 </Page>

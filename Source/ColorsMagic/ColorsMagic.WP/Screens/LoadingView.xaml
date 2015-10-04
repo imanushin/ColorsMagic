@@ -11,11 +11,6 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     DataContext="{StaticResource LoadingViewModel}" 
     >
-    <i:Interaction.Behaviors>
-        <core:EventTriggerBehavior EventName="Loaded" >
-            <core:InvokeCommandAction Command="{Binding LoadingCommand}"/>
-        </core:EventTriggerBehavior>
-    </i:Interaction.Behaviors>
 
     <Grid>
         <ProgressBar 

@@ -14,7 +14,7 @@ namespace ColorsMagic.WP.Screens
 
         private static async Task OpenFirstPageAsync()
         {
-            await ViewModels.GameViewModel.InitGameAsync().ConfigureAwait(true);
+            await ViewModels.GameViewModel.InitGameAsync(false).ConfigureAwait(true);
 
             NavigationService.Instance.Navigate(typeof(GameView));
         }

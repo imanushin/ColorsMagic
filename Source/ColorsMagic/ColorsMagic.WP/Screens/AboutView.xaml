@@ -1,0 +1,25 @@
+﻿<Page
+    x:Class="ColorsMagic.WP.Screens.AboutView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ColorsMagic.WP.Screens"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    DataContext="{StaticResource AboutViewModel}"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch">
+        <TextBlock Text="{Binding ApplicationInfo}"/>
+
+        <Button 
+            HorizontalAlignment="Stretch"
+            Content="{Binding RateApplicationText}"
+            Command="{Binding RateApplicationCommand}"/>
+
+        <Button 
+            HorizontalAlignment="Stretch"
+            Command="{Binding WriteToAuthorsCommand}"
+            Content="{Binding WriteToAuthorsText}"/>
+    </StackPanel>
+</Page>

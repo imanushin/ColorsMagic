@@ -15,7 +15,7 @@ namespace ColorsMagic.WP.Common
         public void Navigate(Type sourcePage)
         {
             var frame = (Frame)Window.Current.Content;
-            var navigationResult = frame.Navigate(sourcePage);
+            frame.Navigate(sourcePage);
         }
 
         public void Navigate(Type sourcePage, object parameter)
@@ -31,6 +31,10 @@ namespace ColorsMagic.WP.Common
             if (frame.CanGoBack)
             {
                 frame.GoBack();
+            }
+            else
+            {
+                Application.Current.Exit();
             }
         }
     }

@@ -15,11 +15,11 @@ namespace ColorsMagic.WP.Screens
 
         public GameColorViewModel[] GameColors { get; private set; } = new GameColorViewModel[0];
 
-        public async Task InitGameAsync()
+        public async Task InitGameAsync(bool forceNewGame)
         {
             _settings = await SettingsManager.Instance.GetCurrentData().ConfigureAwait(true);
 
-            if (ReferenceEquals(_settings.CurrentGame, null))
+            if (forceNewGame || ReferenceEquals(_settings.CurrentGame, null))
             {
                 _settings.CurrentGame = CreateNewGame();
 
