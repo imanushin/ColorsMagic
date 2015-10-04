@@ -13,17 +13,31 @@
     <i:Interaction.Behaviors>
 
     </i:Interaction.Behaviors>
-    
+
     <Page.Resources>
         <Style x:Name="CellStyle" 
                TargetType="Ellipse"
                d:DataContext="GameColorViewModel">
         </Style>
     </Page.Resources>
-    
-    <Grid>
-        <Grid Name="GameGrid">
-            
-        </Grid>
+
+    <Grid Name="RootContainer">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Viewbox 
+            Stretch="Uniform"
+            MaxWidth="{Binding ElementName=RootContainer, Path=ActualWidth}"
+            MaxHeight="{Binding ElementName=RootContainer, Path=ActualHeight}">
+            <Grid Name="GameGrid">
+
+            </Grid>
+        </Viewbox>
     </Grid>
 </Page>

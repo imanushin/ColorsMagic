@@ -54,18 +54,19 @@ namespace ColorsMagic.WP.Screens
                 var position = PositionHelper.GetTrianglePosition(index);
 
                 var rowIndex = position.Row;
-                var columnIndex = position.Column * 2 + 1;
+                var columnIndex = position.Column * 2 - 1 + (triangleSize - position.Row);
 
                 var circle = new Ellipse();
 
                 circle.Fill = new SolidColorBrush(Color.FromArgb(255, 255, 255, 255));
                 circle.Style = style;
 
-                circle.VerticalAlignment= VerticalAlignment.Stretch;
-                circle.HorizontalAlignment=HorizontalAlignment.Stretch;
+                circle.VerticalAlignment = VerticalAlignment.Stretch;
+                circle.HorizontalAlignment = HorizontalAlignment.Stretch;
 
                 Grid.SetRow(circle, rowIndex);
                 Grid.SetColumn(circle, columnIndex);
+                Grid.SetColumnSpan(circle, 2);
 
                 gameGrid.Children.Add(circle);
             }
@@ -85,12 +86,20 @@ namespace ColorsMagic.WP.Screens
                 gameGrid.RowDefinitions.Add(row);
             }
 
-            var newColumns = Enumerable.Range(0, triangleSize * 2 - 1).Select(i => CreateNewColumn()).ToArray();
+            var newColumns = Enumerable.Range(0, triangleSize * 2).Select(i => CreateNewColumn()).ToArray();
 
             foreach (var column in newColumns)
             {
                 gameGrid.ColumnDefinitions.Add(column);
             }
+
+            var width = gameGrid.ColumnDefinitions.Count * 10;
+            var height = gameGrid.RowDefinitions.Count * 20;
+
+            gameGrid.MaxWidth = width;
+            gameGrid.MinWidth = width;
+            gameGrid.MaxHeight = height;
+            gameGrid.MinHeight = height;
         }
 
         private static ColumnDefinition CreateNewColumn()
