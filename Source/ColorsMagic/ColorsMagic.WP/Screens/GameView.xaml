@@ -18,6 +18,12 @@
         <Style x:Name="CellStyle" 
                TargetType="Ellipse"
                d:DataContext="GameColorViewModel">
+            <Setter Property="Margin" Value="1"/>
+            <Setter Property="Fill">
+                <Setter.Value>
+                    <SolidColorBrush Color="{Binding Color, Mode=TwoWay}"/>
+                </Setter.Value>
+            </Setter>
         </Style>
     </Page.Resources>
 

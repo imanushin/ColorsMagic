@@ -57,19 +57,30 @@ namespace ColorsMagic.WP.Screens
                 var columnIndex = position.Column * 2 - 1 + (triangleSize - position.Row);
 
                 var circle = new Ellipse();
-
-                circle.Fill = new SolidColorBrush(Color.FromArgb(255, 255, 255, 255));
-                circle.Style = style;
-
+                
                 circle.VerticalAlignment = VerticalAlignment.Stretch;
                 circle.HorizontalAlignment = HorizontalAlignment.Stretch;
+
+                var targetModel = gameColors[index];
+
+                circle.DataContext = targetModel;
+                circle.Style = style;
+
+                targetModel.PropertyChanged += (_, __) => UpdateView(circle, targetModel);
 
                 Grid.SetRow(circle, rowIndex);
                 Grid.SetColumn(circle, columnIndex);
                 Grid.SetColumnSpan(circle, 2);
 
+                UpdateView(circle, targetModel);
+
                 gameGrid.Children.Add(circle);
             }
+        }
+
+        private void UpdateView(Ellipse circle, GameColorViewModel targetModel)
+        {
+            circle.Fill = new SolidColorBrush(targetModel.Color);
         }
 
         private static void GenerateGridLayout(Grid gameGrid, GameColorViewModel[] gameColors)

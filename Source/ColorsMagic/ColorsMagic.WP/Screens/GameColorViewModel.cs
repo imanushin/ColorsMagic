@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.UI;
 using ColorsMagic.WP.Settings;
+using JetBrains.Annotations;
 
 namespace ColorsMagic.WP.Screens
 {
-    public sealed class GameColorViewModel
+    public sealed class GameColorViewModel : INotifyPropertyChanged
     {
         private readonly GameColor[] _realColors;
         private readonly int _index;
@@ -43,6 +46,14 @@ namespace ColorsMagic.WP.Screens
                         throw new ArgumentOutOfRangeException();
                 }
             }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

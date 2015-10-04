@@ -30,11 +30,11 @@ namespace ColorsMagic.Common.GameModel
                 case GamePosition.Top:
                     return 0;
                 case GamePosition.CenterLeft:
-                    return GetCellsCount(size / 2) + 1;
+                    return GetCellsCount(size / 2) - 1;
                 case GamePosition.CenterRight:
-                    return GetCellsCount(size / 2 + 1) - 1;
+                    return GetCellsCount(size / 2 + 1);
                 case GamePosition.BottomLeft:
-                    return GetCellsCount(size - 1) + 1;
+                    return GetCellsCount(size - 1);
                 case GamePosition.BottomRight:
                     return colorsCount - 1;
                 case GamePosition.BottomCenter:
