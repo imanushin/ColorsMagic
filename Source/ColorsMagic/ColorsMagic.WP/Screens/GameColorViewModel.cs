@@ -5,7 +5,9 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Windows.UI;
+using ColorsMagic.WP.Common;
 using ColorsMagic.WP.Settings;
 using JetBrains.Annotations;
 
@@ -47,6 +49,7 @@ namespace ColorsMagic.WP.Screens
                 }
             }
         }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 

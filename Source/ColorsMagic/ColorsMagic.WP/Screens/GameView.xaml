@@ -9,6 +9,7 @@
     xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    DataContext="{StaticResource GameViewModel}"
     Loaded="GameView_OnLoaded">
     <i:Interaction.Behaviors>
 
@@ -16,16 +17,21 @@
 
     <Page.Resources>
         <Style x:Name="CellStyle" 
-               TargetType="Ellipse"
-               d:DataContext="GameColorViewModel">
+               TargetType="Ellipse">
             <Setter Property="Margin" Value="1"/>
-            <Setter Property="Fill">
-                <Setter.Value>
-                    <SolidColorBrush Color="{Binding Color, Mode=TwoWay}"/>
-                </Setter.Value>
-            </Setter>
         </Style>
     </Page.Resources>
+
+    <Page.BottomAppBar>
+        <CommandBar>
+            <CommandBar.PrimaryCommands>
+                <AppBarButton
+                    Label="{Binding GoToMenuText}"
+                    Command="{Binding GoToMenuCommand}" 
+                    Icon="Home" />
+            </CommandBar.PrimaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
 
     <Grid Name="RootContainer">
         <Grid.RowDefinitions>

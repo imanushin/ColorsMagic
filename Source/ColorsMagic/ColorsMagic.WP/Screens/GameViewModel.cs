@@ -1,7 +1,10 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using Windows.UI.Xaml;
 using ColorsMagic.Common.GameModel;
+using ColorsMagic.WP.Common;
 using ColorsMagic.WP.Settings;
 
 namespace ColorsMagic.WP.Screens
@@ -48,5 +51,17 @@ namespace ColorsMagic.WP.Screens
                 Level = GameLevel.Newbe
             };
         }
+        public ICommand GoToMenuCommand
+        {
+            get
+            {
+                return new RelayCommand(_ =>
+                {
+                    NavigationService.Instance.Navigate(typeof(MainMenuView));
+                });
+            }
+        }
+
+        public string GoToMenuText { get; } = "Main Menu";
     }
 }

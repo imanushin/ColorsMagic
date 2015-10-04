@@ -23,6 +23,10 @@ namespace ColorsMagic.WP.Screens
         public GameView()
         {
             this.InitializeComponent();
+
+            //this.BottomAppBar
+
+
         }
 
         private void GameView_OnLoaded(object sender, RoutedEventArgs e)

@@ -7,5 +7,6 @@
     <Application.Resources>
         <screens:GameViewModel x:Name="GameViewModel"/>
         <screens:LoadingViewModel x:Name="LoadingViewModel"/>
+        <screens:MainMenuViewModel x:Name="MainMenuViewModel"/>
     </Application.Resources>
 </Application>
