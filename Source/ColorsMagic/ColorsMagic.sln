@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColorsMagic.WP", "ColorsMagic.WP\ColorsMagic.WP.csproj", "{C1C196D0-4B2C-4221-B18A-91FAA27F4631}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColorsMagic.Common", "ColorsMagic.Common\ColorsMagic.Common.csproj", "{F3F99453-65B8-468E-9F9F-223180C82117}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColorsMagic.Tests", "ColorsMagic.Tests\ColorsMagic.Tests.csproj", "{FB23B57B-00E7-4009-BA1F-B4806ABC57FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColorsMagic.Desktop", "ColorsMagic.Desktop\ColorsMagic.Desktop.csproj", "{56A908F2-9245-493A-AA5E-CA8FDE7650DA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,6 +63,18 @@ Global
 		{FB23B57B-00E7-4009-BA1F-B4806ABC57FB}.Release|ARM.Build.0 = Release|Any CPU
 		{FB23B57B-00E7-4009-BA1F-B4806ABC57FB}.Release|x86.ActiveCfg = Release|Any CPU
 		{FB23B57B-00E7-4009-BA1F-B4806ABC57FB}.Release|x86.Build.0 = Release|Any CPU
+		{56A908F2-9245-493A-AA5E-CA8FDE7650DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56A908F2-9245-493A-AA5E-CA8FDE7650DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56A908F2-9245-493A-AA5E-CA8FDE7650DA}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{56A908F2-9245-493A-AA5E-CA8FDE7650DA}.Debug|ARM.Build.0 = Debug|Any CPU
+		{56A908F2-9245-493A-AA5E-CA8FDE7650DA}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{56A908F2-9245-493A-AA5E-CA8FDE7650DA}.Debug|x86.Build.0 = Debug|Any CPU
+		{56A908F2-9245-493A-AA5E-CA8FDE7650DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56A908F2-9245-493A-AA5E-CA8FDE7650DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56A908F2-9245-493A-AA5E-CA8FDE7650DA}.Release|ARM.ActiveCfg = Release|Any CPU
+		{56A908F2-9245-493A-AA5E-CA8FDE7650DA}.Release|ARM.Build.0 = Release|Any CPU
+		{56A908F2-9245-493A-AA5E-CA8FDE7650DA}.Release|x86.ActiveCfg = Release|Any CPU
+		{56A908F2-9245-493A-AA5E-CA8FDE7650DA}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

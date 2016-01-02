@@ -23,12 +23,8 @@ namespace ColorsMagic.WP.Screens
         public GameView()
         {
             this.InitializeComponent();
-
-            //this.BottomAppBar
-
-
         }
-
+        
         private void GameView_OnLoaded(object sender, RoutedEventArgs e)
         {
             var viewModel = ViewModels.GameViewModel;
@@ -43,6 +39,13 @@ namespace ColorsMagic.WP.Screens
             var style = (Style)Resources["CellStyle"];
 
             GenerateGridBalls(gameGrid, gameColors, style);
+
+            GenerateGridGrid(gameGrid, gameColors);
+        }
+
+        private void GenerateGridGrid(Grid gameGrid, GameColorViewModel[] gameColors)
+        {
+            throw new NotImplementedException();
         }
 
         private void GenerateGridBalls(Grid gameGrid, GameColorViewModel[] gameColors, Style style)
@@ -59,7 +62,7 @@ namespace ColorsMagic.WP.Screens
 
                 var rowIndex = position.Row;
                 var columnIndex = position.Column * 2 - 1 + (triangleSize - position.Row);
-
+                
                 var circle = new Ellipse();
                 
                 circle.VerticalAlignment = VerticalAlignment.Stretch;
