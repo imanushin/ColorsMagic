@@ -1,7 +1,7 @@
 ﻿using JetBrains.Annotations;
 
 namespace ColorsMagic.Common
-{
+{    
     public static class Logger
     {
         [StringFormatMethod("errorFormat")]

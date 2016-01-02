@@ -82,10 +82,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Common\NavigationService.cs" />
-    <Compile Include="Common\RelayCommand.cs" />
-    <Compile Include="Common\TaskCommand.cs" />
-    <Compile Include="Common\TaskHelpers.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -93,26 +89,15 @@
     <Compile Include="Screens\AboutView.xaml.cs">
       <DependentUpon>AboutView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Screens\AboutViewModel.cs" />
-    <Compile Include="Screens\GameColorViewModel.cs" />
     <Compile Include="Screens\GameView.xaml.cs">
       <DependentUpon>GameView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Screens\GameViewModel.cs" />
     <Compile Include="Screens\LoadingView.xaml.cs">
       <DependentUpon>LoadingView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Screens\LoadingViewModel.cs" />
     <Compile Include="Screens\MainMenuView.xaml.cs">
       <DependentUpon>MainMenuView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Screens\MainMenuViewModel.cs" />
-    <Compile Include="Screens\ViewModels.cs" />
-    <Compile Include="Settings\GameColor.cs" />
-    <Compile Include="Settings\GameLevel.cs" />
-    <Compile Include="Settings\ProgramData.cs" />
-    <Compile Include="Settings\GameData.cs" />
-    <Compile Include="Settings\SettingsManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -174,6 +159,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
+  <Import Project="..\ColorsMagic.SharedUi\ColorsMagic.SharedUi.projitems" Label="Shared" />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
   </PropertyGroup>
