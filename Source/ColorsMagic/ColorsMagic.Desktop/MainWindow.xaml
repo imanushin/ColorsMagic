@@ -7,6 +7,24 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        
+        <Grid Name="RootContainer">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Viewbox 
+            Stretch="Uniform"
+            MaxWidth="{Binding ElementName=RootContainer, Path=ActualWidth}"
+            MaxHeight="{Binding ElementName=RootContainer, Path=ActualHeight}">
+                <Grid Name="GameGrid">
+
+                </Grid>
+            </Viewbox>
+        </Grid>
     </Grid>
 </Window>

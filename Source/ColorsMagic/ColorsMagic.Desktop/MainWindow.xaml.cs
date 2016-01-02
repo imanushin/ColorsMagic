@@ -23,6 +23,15 @@ namespace ColorsMagic.Desktop
         public MainWindow()
         {
             InitializeComponent();
+
+            this.Loaded += MainWindow_Loaded;
+        }
+
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            var viewModel = ViewModels.GameViewModel;
+
+            BuildTriangle(GameGrid, viewModel.GameColors);
         }
     }
 }
