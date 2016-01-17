@@ -90,6 +90,7 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="PortablePointExtensions.cs" />
+    <Compile Include="PortableSizeExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Screens\AboutView.xaml.cs">
       <DependentUpon>AboutView.xaml</DependentUpon>

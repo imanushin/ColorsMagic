@@ -9,8 +9,7 @@
     xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-    DataContext="{StaticResource GameViewModel}"
-    Loaded="GameView_OnLoaded">
+    DataContext="{StaticResource GameViewModel}">
     <i:Interaction.Behaviors>
 
     </i:Interaction.Behaviors>
@@ -33,7 +32,7 @@
         </CommandBar>
     </Page.BottomAppBar>
 
-    <Grid Name="RootContainer">
+    <Grid Name="RootContainer" SizeChanged="RootContainer_OnSizeChanged">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
@@ -43,11 +42,8 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <Viewbox 
-            Stretch="Uniform"
-            MaxWidth="{Binding ElementName=RootContainer, Path=ActualWidth}"
-            MaxHeight="{Binding ElementName=RootContainer, Path=ActualHeight}">
-            <Canvas Name="GameCanvas"/>
-        </Viewbox>
+        <Canvas Name="GameCanvas" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top"/>
     </Grid>
 </Page>

@@ -25,19 +25,13 @@ namespace ColorsMagic.WP.Screens
         {
             this.InitializeComponent();
         }
-
-        private void GameView_OnLoaded(object sender, RoutedEventArgs e)
-        {
-            var viewModel = ViewModels.GameViewModel;
-
-            BuildGrid(viewModel.GameColors);
-        }
+        
 
         private void BuildGrid(GameColorViewModel[] gameColors)
         {
             GameCanvas.Children.Clear();
-
-            var pointsGenerator = new GridGenerator(gameColors.Length);
+            
+            var pointsGenerator = new GridGenerator(gameColors.Length, RootContainer.RenderSize.ToSize());
 
             var path = new Path();
 
@@ -51,8 +45,8 @@ namespace ColorsMagic.WP.Screens
 
             GameCanvas.Children.Add(path);
 
-            GameCanvas.Width = pointsGenerator.Width;
-            GameCanvas.Height = pointsGenerator.Height;
+            GameCanvas.Width = pointsGenerator.Size.Width;
+            GameCanvas.Height = pointsGenerator.Size.Height;
         }
 
         private PathFigureCollection CreatePathFigure(GridGenerator pointsGenerator)
@@ -213,6 +207,13 @@ namespace ColorsMagic.WP.Screens
             {
                 Height = new GridLength(1, GridUnitType.Star)
             };
+        }
+
+        private void RootContainer_OnSizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            var viewModel = ViewModels.GameViewModel;
+
+            BuildGrid(viewModel.GameColors);
         }
     }
 }

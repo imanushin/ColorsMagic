@@ -37,6 +37,7 @@
     <Compile Include="GameModel\GamePosition.cs" />
     <Compile Include="GameModel\GridGenerator.cs" />
     <Compile Include="GameModel\PortablePoint.cs" />
+    <Compile Include="GameModel\PortableSize.cs" />
     <Compile Include="GameModel\PositionHelper.cs" />
     <Compile Include="GameModel\TrianglePosition.cs" />
     <Compile Include="Logger.cs" />
