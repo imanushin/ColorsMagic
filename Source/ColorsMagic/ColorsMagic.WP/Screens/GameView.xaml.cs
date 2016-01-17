@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Shapes;
 using ColorsMagic.Common.GameModel;
+using Path = Windows.UI.Xaml.Shapes.Path;
 
 namespace ColorsMagic.WP.Screens
 {
@@ -29,18 +30,63 @@ namespace ColorsMagic.WP.Screens
         {
             var viewModel = ViewModels.GameViewModel;
 
-            BuildTriangle(GameGrid, viewModel.GameColors);
+            BuildGrid(viewModel.GameColors);
+        }
+
+        private void BuildGrid(GameColorViewModel[] gameColors)
+        {
+            GameCanvas.Children.Clear();
+
+            var pointsGenerator = new GridGenerator(gameColors.Length);
+
+            var path = new Path();
+
+            path.Data = new PathGeometry()
+            {
+                Figures = CreatePathFigure(pointsGenerator),
+            };
+
+            path.Stroke = new SolidColorBrush(Colors.White);
+            path.Fill = new SolidColorBrush(Colors.Green);
+
+            GameCanvas.Children.Add(path);
+
+            GameCanvas.Width = pointsGenerator.Width;
+            GameCanvas.Height = pointsGenerator.Height;
+        }
+
+        private PathFigureCollection CreatePathFigure(GridGenerator pointsGenerator)
+        {
+            var result = new PathFigureCollection();
+
+            var figure = new PathFigure();
+
+            var points = pointsGenerator.ExternalGrid;
+
+            figure.StartPoint = points.First().ToPoint();
+
+            foreach (var segment in points.Skip(1).Select(p => new LineSegment() { Point = p.ToPoint() }))
+            {
+                figure.Segments.Add(segment);
+            }
+
+            figure.IsClosed = true;
+            figure.IsFilled = true;
+
+            result.Add(figure);
+
+            return result;
         }
 
         private void BuildTriangle(Grid gameGrid, GameColorViewModel[] gameColors)
         {
-            GenerateGridLayout(gameGrid, gameColors);
+            /*enerateGridLayout(gameGrid, gameColors);
 
             var style = (Style)Resources["CellStyle"];
 
             GenerateGridBalls(gameGrid, gameColors, style);
 
-            GenerateGridGrid(gameGrid, gameColors);
+            GenerateGridGrid(gameGrid, gameColors);*/
         }
 
         private void GenerateGridGrid(Grid gameGrid, GameColorViewModel[] gameColors)
@@ -80,6 +126,7 @@ namespace ColorsMagic.WP.Screens
 
                 circle.DataContext = targetModel;
                 circle.Style = style;
+                circle.Margin = new Thickness(0, 0, 0, -.75);
 
                 targetModel.PropertyChanged += (_, __) => UpdateView(circle, targetModel);
 
@@ -109,43 +156,12 @@ namespace ColorsMagic.WP.Screens
 
         private static FrameworkElement CreateHex()
         {
-            var result = new Grid();
-
-            result.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star) });
-            result.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(2, GridUnitType.Star) });
-            result.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star) });
-
-            result.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(1, GridUnitType.Star) });
-            result.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(1, GridUnitType.Star) });
-
-            result.Margin = new Thickness(0, 0, 0, -1);
-
-            var topLine = new Rectangle()
+            return new Hexagon()
             {
-                VerticalAlignment = VerticalAlignment.Top,
-                HorizontalAlignment = HorizontalAlignment.Stretch,
-                Height = 1,
-                Stroke = new SolidColorBrush(Colors.White)
+                Stroke = new SolidColorBrush(Colors.White),
+                StrokeThickness = 0.3,
+                Margin = new Thickness(0, -3, 0, -4)
             };
-
-            Grid.SetColumn(topLine, 1);
-            Grid.SetRow(topLine, 0);
-
-            var bottomLine = new Rectangle()
-            {
-                VerticalAlignment = VerticalAlignment.Bottom,
-                HorizontalAlignment = HorizontalAlignment.Stretch,
-                Height = 1,
-                Stroke = new SolidColorBrush(Colors.White)
-            };
-
-            Grid.SetColumn(bottomLine, 1);
-            Grid.SetRow(bottomLine, 1);
-
-            result.Children.Add(topLine);
-            result.Children.Add(bottomLine);
-
-            return result;
         }
 
         private void UpdateView(Ellipse circle, GameColorViewModel targetModel)

@@ -47,9 +47,7 @@
             Stretch="Uniform"
             MaxWidth="{Binding ElementName=RootContainer, Path=ActualWidth}"
             MaxHeight="{Binding ElementName=RootContainer, Path=ActualHeight}">
-            <Grid Name="GameGrid">
-
-            </Grid>
+            <Canvas Name="GameCanvas"/>
         </Viewbox>
     </Grid>
 </Page>

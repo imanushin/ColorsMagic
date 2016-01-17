@@ -1,0 +1,23 @@
+﻿<ContentControl
+    x:Class="ColorsMagic.WP.Screens.Hexagon"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Name="Root"
+    d:DesignHeight="300"
+    d:DesignWidth="300">
+
+    <Path 
+        d:LayoutOverrides="None" 
+        d:LastTangent="0,0" 
+        Stroke="{Binding ElementName=Root, Path=Stroke, Mode=OneWay}" 
+        Fill="{Binding ElementName=Root, Path=Fill, Mode=OneWay}" 
+        StrokeThickness="{Binding ElementName=Root, Path=StrokeThickness, Mode=OneWay}"
+        HorizontalAlignment="Stretch"
+        VerticalAlignment="Stretch"
+        Margin="0" 
+        Stretch="Fill" 
+      Data="M8.660254,0 L17.320508,5 17.320508,15 8.660254,20 0,15 0,5 8.660254,0 z"/>
+</ContentControl>
