@@ -49,8 +49,8 @@ namespace ColorsMagic.Common.GameModel
             {
                 var result = new List<PortablePoint>();
 
-                var y0 = 0;
-                var y1 = t / 2;
+                var y0 = Size.Height;
+                var y1 = Size.Height - t / 2;
                 result.Add(new PortablePoint(0, y1));
 
                 for (var i = 0; i < _edgeCellsCount; i++)
@@ -59,22 +59,83 @@ namespace ColorsMagic.Common.GameModel
                     result.Add(new PortablePoint(i * r * 2 + 2 * r, y1));
                 }
 
-                for (var i = 0; i < _edgeCellsCount; i++)
-                {
-                    result.Add(new PortablePoint(Size.Width - i * r, (i + 1) * 3 * t / 2));
-                    result.Add(new PortablePoint(Size.Width - i * r - r, (i + 1) * 3 * t / 2 + t / 2));
-                }
+                result.AddRange(GetLeftToBottomPath(_edgeCellsCount));
 
-                for (var i = 0; i < _edgeCellsCount; i++)
-                {
-                    result.Add(new PortablePoint(Size.Width / 2 - (i + 1) * r, (_edgeCellsCount - i) * (3 * t / 2)));
-                    result.Add(new PortablePoint(Size.Width / 2 - (i + 1) * r, (_edgeCellsCount - i) * (3 * t / 2) - t));
-                }
+                result.AddRange(GetRightToBottomPath(_edgeCellsCount));
 
-                return result.Select(p => new PortablePoint(p.X, Size.Height - p.Y)).ToImmutableArray();
+                return result.ToImmutableArray();
             }
         }
 
-        public PortableSize Size { get; private set; }
+        private ImmutableArray<PortablePoint> Reverse(IEnumerable<PortablePoint> result)
+        {
+            return result.Select(p => new PortablePoint(p.X, Size.Height - p.Y)).ToImmutableArray();
+        }
+
+        private ImmutableArray<PortablePoint> GetRightToBottomPath(int itemsCount)
+        {
+            var width = Size.Width;
+
+            var result = new List<PortablePoint>();
+
+            for (var i = 0; i < itemsCount; i++)
+            {
+                result.Add(new PortablePoint(width / 2 - (i + 1) * r, (itemsCount - i) * (3 * t / 2)));
+                result.Add(new PortablePoint(width / 2 - (i + 1) * r, (itemsCount - i) * (3 * t / 2) - t));
+            }
+
+            return Reverse(result);
+        }
+
+        private ImmutableArray<PortablePoint> GetLeftToBottomPath(int itemsCount)
+        {
+            var width = GetSize(r, itemsCount).Width;
+
+            var result = new List<PortablePoint>();
+
+            for (var i = 0; i < itemsCount; i++)
+            {
+                result.Add(new PortablePoint(width - i * r, (i + 1) * 3 * t / 2));
+                result.Add(new PortablePoint(width - i * r - r, (i + 1) * 3 * t / 2 + t / 2));
+            }
+
+            return Reverse(result);
+        }
+
+        public ImmutableArray<ImmutableArray<PortablePoint>> InternalPathes
+        {
+            get
+            {
+                var result = new List<ImmutableArray<PortablePoint>>();
+
+                for (var i = 1; i < _edgeCellsCount; i++)
+                {
+                    var bottomToLeftPath = new List<PortablePoint>();
+                    var bottomToRightPath = new List<PortablePoint>();
+
+                    for (var row = 0; row < _edgeCellsCount - i + 1; row++)
+                    {
+                        var y1 = t / 2 + row * 3 * t / 2;
+                        var y2 = y1 + t;
+
+                        var lx = i * r * 2 + r * row;
+                        var rx = Size.Width - lx;
+
+                        bottomToLeftPath.Add(new PortablePoint(lx, y1));
+                        bottomToLeftPath.Add(new PortablePoint(lx, y2));
+
+                        bottomToRightPath.Add(new PortablePoint(rx, y1));
+                        bottomToRightPath.Add(new PortablePoint(rx, y2));
+                    }
+
+                    result.Add(Reverse(bottomToLeftPath));
+                    result.Add(Reverse(bottomToRightPath));
+                }
+
+                return result.ToImmutableArray();
+            }
+        }
+
+        public PortableSize Size { get; }
     }
 }

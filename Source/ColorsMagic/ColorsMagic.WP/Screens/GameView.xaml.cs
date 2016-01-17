@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -25,12 +26,12 @@ namespace ColorsMagic.WP.Screens
         {
             this.InitializeComponent();
         }
-        
+
 
         private void BuildGrid(GameColorViewModel[] gameColors)
         {
             GameCanvas.Children.Clear();
-            
+
             var pointsGenerator = new GridGenerator(gameColors.Length, RootContainer.RenderSize.ToSize());
 
             var path = new Path();
@@ -53,9 +54,39 @@ namespace ColorsMagic.WP.Screens
         {
             var result = new PathFigureCollection();
 
-            var figure = new PathFigure();
+            result.Add(GetExternalGridFigure(pointsGenerator.ExternalGrid));
 
-            var points = pointsGenerator.ExternalGrid;
+            foreach (var points in pointsGenerator.InternalPathes)
+            {
+                result.Add(GetInteralGridFigure(points));
+            }
+
+            return result;
+        }
+
+        private static PathFigure GetInteralGridFigure(ImmutableArray<PortablePoint> points)
+        {
+            var figure = GetFigureFromPoints(points);
+
+            figure.IsClosed = false;
+            figure.IsFilled = false;
+
+            return figure;
+        }
+
+        private static PathFigure GetExternalGridFigure(ImmutableArray<PortablePoint> points)
+        {
+            var figure = GetFigureFromPoints(points);
+
+            figure.IsClosed = true;
+            figure.IsFilled = true;
+
+            return figure;
+        }
+
+        private static PathFigure GetFigureFromPoints(ImmutableArray<PortablePoint> points)
+        {
+            var figure = new PathFigure();
 
             figure.StartPoint = points.First().ToPoint();
 
@@ -63,13 +94,7 @@ namespace ColorsMagic.WP.Screens
             {
                 figure.Segments.Add(segment);
             }
-
-            figure.IsClosed = true;
-            figure.IsFilled = true;
-
-            result.Add(figure);
-
-            return result;
+            return figure;
         }
 
         private void BuildTriangle(Grid gameGrid, GameColorViewModel[] gameColors)
