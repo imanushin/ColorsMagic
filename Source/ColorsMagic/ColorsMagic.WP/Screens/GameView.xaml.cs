@@ -156,7 +156,7 @@ namespace ColorsMagic.WP.Screens
 
         private void UpdateView(Ellipse circle, GameColorViewModel targetModel)
         {
-            circle.Fill = new SolidColorBrush(targetModel.Color);
+            circle.Fill = new SolidColorBrush(targetModel.Color.GetColor());
         }
 
         private static void GenerateGridLayout(Grid gameGrid, GameColorViewModel[] gameColors)

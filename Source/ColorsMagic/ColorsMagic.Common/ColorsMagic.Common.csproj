@@ -34,6 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="GameModel\DragAndDropManager.cs" />
+    <Compile Include="GameModel\GameColor.cs" />
+    <Compile Include="GameModel\GameColorViewModel.cs" />
     <Compile Include="GameModel\GamePosition.cs" />
     <Compile Include="GameModel\GridGenerator.cs" />
     <Compile Include="GameModel\PortablePoint.cs" />
