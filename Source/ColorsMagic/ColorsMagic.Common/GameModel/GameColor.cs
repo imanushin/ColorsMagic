@@ -1,4 +1,4 @@
-﻿namespace ColorsMagic.WP.Settings
+﻿namespace ColorsMagic.Common.GameModel
 {
     public enum GameColor
     {

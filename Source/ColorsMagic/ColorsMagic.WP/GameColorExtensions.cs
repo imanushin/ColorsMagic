@@ -1,5 +1,6 @@
 ﻿using System;
 using Windows.UI;
+using ColorsMagic.Common.GameModel;
 using ColorsMagic.WP.Settings;
 
 namespace ColorsMagic.WP

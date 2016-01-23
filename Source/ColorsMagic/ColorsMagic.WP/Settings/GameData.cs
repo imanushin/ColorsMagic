@@ -1,4 +1,6 @@
-﻿namespace ColorsMagic.WP.Settings
+﻿using ColorsMagic.Common.GameModel;
+
+namespace ColorsMagic.WP.Settings
 {
     public sealed class GameData
     {
