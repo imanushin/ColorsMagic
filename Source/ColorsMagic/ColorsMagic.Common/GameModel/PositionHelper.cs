@@ -21,24 +21,24 @@ namespace ColorsMagic.Common.GameModel
             return result - 1;
         }
 
-        public static int GetPosition(int colorsCount, GamePosition position)
+        public static TrianglePosition GetPosition(int colorsCount, GamePosition position)
         {
             var size = GetMaxTriangleSize(colorsCount);
 
             switch (position)
             {
                 case GamePosition.Top:
-                    return 0;
+                    return new TrianglePosition(size - 1, 0, size);
                 case GamePosition.CenterLeft:
-                    return GetCellsCount(size / 2) - 1;
+                    return new TrianglePosition(size / 2, 0, size);
                 case GamePosition.CenterRight:
-                    return GetCellsCount(size / 2 + 1);
+                    return new TrianglePosition(size / 2, size / 2, size);
                 case GamePosition.BottomLeft:
-                    return GetCellsCount(size - 1);
+                    return new TrianglePosition(0, 0, size);
                 case GamePosition.BottomRight:
-                    return colorsCount - 1;
+                    return new TrianglePosition(0, size - 1, size);
                 case GamePosition.BottomCenter:
-                    return GetCellsCount(size - 1) + size / 2;
+                    return new TrianglePosition(0, size / 2, size);
                 default:
                     throw new ArgumentOutOfRangeException(nameof(position), position, null);
             }
