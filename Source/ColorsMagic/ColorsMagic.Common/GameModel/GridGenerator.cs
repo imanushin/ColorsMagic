@@ -141,7 +141,7 @@ namespace ColorsMagic.Common.GameModel
         public PortablePoint GetCenterOfCell(TrianglePosition position)
         {
             var x = (position.Row + 2 * position.Column + 1) * r;
-            var y = (1 + 2 * position.Row) * t;
+            var y = (1 + 3 * position.Row) * t / 2;
 
             Validate.GreaterThan(x, 0);
             Validate.GreaterThan(y, 0);
