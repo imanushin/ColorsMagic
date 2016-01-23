@@ -27,8 +27,7 @@ namespace ColorsMagic.WP.Screens
         {
             this.InitializeComponent();
         }
-
-
+        
         private void BuildGrid(GameColorViewModel[] gameColors)
         {
             GameCanvas.Children.Clear();
@@ -149,20 +148,10 @@ namespace ColorsMagic.WP.Screens
             Validate.Between(positionOfCenter.X, 0, gameGrid.Width);
             Validate.Between(positionOfCenter.Y, 0, gameGrid.Height);
 
-            Canvas.SetLeft(circle, positionOfCenter.X);
-            Canvas.SetTop(circle, positionOfCenter.Y);
+            Canvas.SetLeft(circle, positionOfCenter.X - circle.Width / 2);
+            Canvas.SetTop(circle, positionOfCenter.Y - circle.Height / 2);
 
             gameGrid.Children.Add(circle);
-        }
-
-        private static FrameworkElement CreateHex()
-        {
-            return new Hexagon()
-            {
-                Stroke = new SolidColorBrush(Colors.White),
-                StrokeThickness = 0.3,
-                Margin = new Thickness(0, -3, 0, -4)
-            };
         }
 
         private void UpdateView(Ellipse circle, GameColorViewModel targetModel)

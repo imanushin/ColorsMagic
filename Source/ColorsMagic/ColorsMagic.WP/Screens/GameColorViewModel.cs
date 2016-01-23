@@ -31,7 +31,7 @@ namespace ColorsMagic.WP.Screens
                 switch (_realColors[_index])
                 {
                     case GameColor.None:
-                        return Color.FromArgb(0, 0, 0, 0);
+                        return Color.FromArgb(255, 255, 255, 255);
                     case GameColor.Red:
                         return Color.FromArgb(255, 255, 0, 0);
                     case GameColor.Green:
