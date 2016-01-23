@@ -44,12 +44,20 @@ namespace ColorsMagic.Common.GameModel
             }
         }
 
-        public static TrianglePosition GetTrianglePosition(int index)
+        public static TrianglePosition GetTrianglePosition(int initialIndex, int triangleSize)
         {
-            var row = GetMaxTriangleSize(index);
-            var column = index - GetCellsCount(row);
+            var index = initialIndex;
+            var row = 0;
 
-            return new TrianglePosition(row, column);
+            while (index - (triangleSize - row) >= 0)
+            {
+                index = index - (triangleSize - row);
+                row++;
+            }
+
+            var column = index;
+
+            return new TrianglePosition(row, column, triangleSize);
         }
     }
 }

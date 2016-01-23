@@ -30,6 +30,8 @@ namespace ColorsMagic.Tests
             PositionHelper.GetMaxTriangleSize(cellsCount).ShouldBe(initialTriangleSize);
         }
 
+
+
         [TestCase(0, 0)]
         [TestCase(2, 3)]
         [TestCase(2, 4)]
@@ -42,18 +44,20 @@ namespace ColorsMagic.Tests
         }
 
         [Test]
-        public void GetTrianglePositionShouldNotReturnZero([Values(1,2,3,4,5,6,7,8,9,10)] int triangleSize)
+        public void GetTrianglePositionShouldNotReturnZero([Values(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)] int triangleSize)
         {
             var cellsCount = PositionHelper.GetCellsCount(triangleSize);
 
             for (var index = 0; index < cellsCount; index++)
             {
-                var result = PositionHelper.GetTrianglePosition(index);
+                var result = PositionHelper.GetTrianglePosition(index, triangleSize);
 
                 result.Row.ShouldBeGreaterThanOrEqualTo(0);
                 result.Row.ShouldBeLessThan(triangleSize);
                 result.Column.ShouldBeGreaterThanOrEqualTo(0);
                 result.Column.ShouldBeLessThan(triangleSize);
+
+                result.Index.ShouldBe(index);
             }
         }
     }

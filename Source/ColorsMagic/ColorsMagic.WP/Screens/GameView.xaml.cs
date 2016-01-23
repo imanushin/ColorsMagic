@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Shapes;
+using CheckContracts;
 using ColorsMagic.Common.GameModel;
 using Path = Windows.UI.Xaml.Shapes.Path;
 
@@ -48,6 +49,8 @@ namespace ColorsMagic.WP.Screens
 
             GameCanvas.Width = pointsGenerator.Size.Width;
             GameCanvas.Height = pointsGenerator.Size.Height;
+
+            GenerateGridBalls(gameColors, (Style) Resources["CellStyle"], pointsGenerator);
         }
 
         private PathFigureCollection CreatePathFigure(GridGenerator pointsGenerator)
@@ -108,34 +111,12 @@ namespace ColorsMagic.WP.Screens
             GenerateGridGrid(gameGrid, gameColors);*/
         }
 
-        private void GenerateGridGrid(Grid gameGrid, GameColorViewModel[] gameColors)
+        private void GenerateGridBalls(GameColorViewModel[] gameColors, Style style, GridGenerator gridGenerator)
         {
-            var triangleSize = PositionHelper.GetMaxTriangleSize(gameColors.Length);
-            /*
-            for (int row = 0; row < triangleSize; row++)
-            {
-                var line = new Rectangle();
-                line.Height = 1;
-                line.HorizontalAlignment = HorizontalAlignment.Stretch;
-                line.VerticalAlignment = VerticalAlignment.Bottom;
-                line.Stroke = new SolidColorBrush(Colors.White);
-                line.StrokeThickness = 1;
-
-                Grid.SetRow(line, row);
-                Grid.SetColumn(line, triangleSize - row - 1);
-                Grid.SetColumnSpan(line, row * 2 + 2);
-
-                gameGrid.Children.Add(line);
-            }*/
-        }
-
-        private void GenerateGridBalls(Grid gameGrid, GameColorViewModel[] gameColors, Style style)
-        {
-            gameGrid.Children.Clear();
-
             var triangleSize = PositionHelper.GetMaxTriangleSize(gameColors.Length);
 
             var colorsCount = gameColors.Length;
+            var size = gridGenerator.EllipseSize;
 
             for (var index = 0; index < colorsCount; index++)
             {
@@ -146,29 +127,30 @@ namespace ColorsMagic.WP.Screens
                 circle.DataContext = targetModel;
                 circle.Style = style;
                 circle.Margin = new Thickness(0, 0, 0, -.75);
+                circle.Width = size.Width;
+                circle.Height = size.Height;
 
                 targetModel.PropertyChanged += (_, __) => UpdateView(circle, targetModel);
 
-                ConfigureAndAddElement(gameGrid, circle, index, triangleSize);
-                ConfigureAndAddElement(gameGrid, CreateHex(), index, triangleSize);
+                var trianglePosition = PositionHelper.GetTrianglePosition(index, triangleSize);
+                var position = gridGenerator.GetCenterOfCell(trianglePosition);
+
+                ConfigureAndAddElement(GameCanvas, circle, position);
 
                 UpdateView(circle, targetModel);
             }
         }
 
-        private static void ConfigureAndAddElement(Grid gameGrid, FrameworkElement circle, int index, int triangleSize)
+        private static void ConfigureAndAddElement(Canvas gameGrid, FrameworkElement circle, PortablePoint positionOfCenter)
         {
             circle.VerticalAlignment = VerticalAlignment.Stretch;
             circle.HorizontalAlignment = HorizontalAlignment.Stretch;
 
-            var position = PositionHelper.GetTrianglePosition(index);
+            Validate.Between(positionOfCenter.X, 0, gameGrid.Width);
+            Validate.Between(positionOfCenter.Y, 0, gameGrid.Height);
 
-            var rowIndex = position.Row;
-            var columnIndex = position.Column * 2 - 1 + (triangleSize - position.Row);
-
-            Grid.SetRow(circle, rowIndex);
-            Grid.SetColumn(circle, columnIndex);
-            Grid.SetColumnSpan(circle, 2);
+            Canvas.SetLeft(circle, positionOfCenter.X);
+            Canvas.SetTop(circle, positionOfCenter.Y);
 
             gameGrid.Children.Add(circle);
         }

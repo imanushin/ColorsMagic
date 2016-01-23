@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using CheckContracts;
 
 namespace ColorsMagic.Common.GameModel
 {
@@ -26,6 +27,7 @@ namespace ColorsMagic.Common.GameModel
             t = GetT(r);
 
             Size = GetSize(r, _edgeCellsCount);
+            EllipseSize = new PortableSize(r, r);
         }
 
         private static double GetT(double r)
@@ -136,6 +138,21 @@ namespace ColorsMagic.Common.GameModel
             }
         }
 
+        public PortablePoint GetCenterOfCell(TrianglePosition position)
+        {
+            var x = (position.Row + 2 * position.Column + 1) * r;
+            var y = (1 + 2 * position.Row) * t;
+
+            Validate.GreaterThan(x, 0);
+            Validate.GreaterThan(y, 0);
+            Validate.LessOrEqualThan(y, Size.Height);
+            Validate.LessOrEqualThan(x, Size.Width);
+
+            return new PortablePoint(x, Size.Height - y);
+        }
+
         public PortableSize Size { get; }
+
+        public PortableSize EllipseSize { get; }
     }
 }

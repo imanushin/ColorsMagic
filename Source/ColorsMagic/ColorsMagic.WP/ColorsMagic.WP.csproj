@@ -163,6 +163,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="CheckContracts, Version=1.4.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\CheckContracts.1.4.3.0\lib\portable-net4+sl4+wp7+win8\CheckContracts.dll</HintPath>
+    </Reference>
     <Reference Include="JetBrains.Annotations.PCL328, Version=10.0.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
       <HintPath>..\packages\JetBrains.Annotations.10.0.0\lib\portable-net4+sl5+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\JetBrains.Annotations.PCL328.dll</HintPath>
       <Private>True</Private>
