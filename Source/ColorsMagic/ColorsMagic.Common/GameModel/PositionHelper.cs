@@ -32,7 +32,7 @@ namespace ColorsMagic.Common.GameModel
                 case GamePosition.CenterLeft:
                     return new TrianglePosition(size / 2, 0, size);
                 case GamePosition.CenterRight:
-                    return new TrianglePosition(size / 2, size / 2, size);
+                    return new TrianglePosition(size / 2 - 1, size / 2, size);
                 case GamePosition.BottomLeft:
                     return new TrianglePosition(0, 0, size);
                 case GamePosition.BottomRight:
