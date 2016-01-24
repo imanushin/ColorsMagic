@@ -113,8 +113,6 @@
     </Compile>
     <Compile Include="Screens\MainMenuViewModel.cs" />
     <Compile Include="Screens\ViewModels.cs" />
-    <Compile Include="Settings\GameData.cs" />
-    <Compile Include="Settings\GameLevel.cs" />
     <Compile Include="Settings\ProgramData.cs" />
     <Compile Include="Settings\SettingsManager.cs" />
   </ItemGroup>

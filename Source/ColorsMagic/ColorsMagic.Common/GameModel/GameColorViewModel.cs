@@ -1,6 +1,7 @@
-﻿using System.ComponentModel;
+﻿using JetBrains.Annotations;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using JetBrains.Annotations;
+using CheckContracts;
 
 namespace ColorsMagic.Common.GameModel
 {
@@ -9,8 +10,10 @@ namespace ColorsMagic.Common.GameModel
         private readonly GameColor[] _realColors;
         private readonly int _index;
 
-        public GameColorViewModel(GameColor[] realColors, int index)
+        public GameColorViewModel([NotNull] GameColor[] realColors, int index)
         {
+            Validate.ArgumentIsNotNull(realColors, nameof(realColors));
+
             _realColors = realColors;
             _index = index;
         }
