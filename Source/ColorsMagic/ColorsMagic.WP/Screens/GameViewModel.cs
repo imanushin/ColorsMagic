@@ -12,6 +12,7 @@ namespace ColorsMagic.WP.Screens
     public sealed class GameViewModel
     {
         private ProgramData _settings;
+        private GameModel _currentModel;
 
         public GameColorViewModel[] GameColors { get; private set; } = new GameColorViewModel[0];
 
@@ -21,16 +22,21 @@ namespace ColorsMagic.WP.Screens
 
             if (forceNewGame || ReferenceEquals(_settings.CurrentGame, null))
             {
-                _settings.CurrentGame = CreateNewGame();
+                _currentModel = CreateNewGame();
+                _settings.CurrentGame = _currentModel.Data;
 
                 await SettingsManager.Instance.SaveCurrentAsync().ConfigureAwait(true);
             }
+            else
+            {
+                _currentModel = new GameModel(_settings.CurrentGame);
+            }
 
-            var gameColors = _settings.CurrentGame.Colors;
+            var gameColors = _currentModel.Data.Colors;
             GameColors = gameColors.Select((v, i) => new GameColorViewModel(gameColors, i)).ToArray();
         }
 
-        private GameData CreateNewGame()
+        private GameModel CreateNewGame()
         {
             var triangleSize = _settings.TriangleSize;
             var trianglesCount = PositionHelper.GetCellsCount(triangleSize);
@@ -44,12 +50,14 @@ namespace ColorsMagic.WP.Screens
             colors[PositionHelper.GetPosition(trianglesCount, GamePosition.CenterRight).Index] = GameColor.LightBlue;
             colors[PositionHelper.GetPosition(trianglesCount, GamePosition.BottomCenter).Index] = GameColor.Yellow;
 
-            return new GameData()
+            var newGameData = new GameData()
             {
                 Colors = colors,
                 CurrentScore = 0,
                 Level = GameLevel.Newbe
             };
+
+            return new GameModel(newGameData);
         }
         public ICommand GoToMenuCommand
         {

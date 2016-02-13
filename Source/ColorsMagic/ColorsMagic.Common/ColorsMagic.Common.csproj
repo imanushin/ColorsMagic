@@ -40,6 +40,7 @@
     <Compile Include="GameModel\GameColorViewModel.cs" />
     <Compile Include="GameModel\GameData.cs" />
     <Compile Include="GameModel\GameLevel.cs" />
+    <Compile Include="GameModel\GameModel.cs" />
     <Compile Include="GameModel\GamePosition.cs" />
     <Compile Include="GameModel\GridGenerator.cs" />
     <Compile Include="GameModel\PortablePoint.cs" />

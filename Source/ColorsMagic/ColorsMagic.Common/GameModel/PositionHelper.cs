@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Immutable;
 
 namespace ColorsMagic.Common.GameModel
 {
@@ -42,6 +43,35 @@ namespace ColorsMagic.Common.GameModel
                 default:
                     throw new ArgumentOutOfRangeException(nameof(position), position, null);
             }
+        }
+
+        public static ImmutableList<TrianglePosition> GetNearest(TrianglePosition current, int triangleSize)
+        {
+            var hasLeft = current.Column > 0;
+            var hasRight = current.Row + current.Column < triangleSize;
+            var hasBottom = current.Row > 0;
+
+            var builder = ImmutableList<TrianglePosition>.Empty.ToBuilder();
+
+            if (hasLeft)
+            {
+                builder.Add(new TrianglePosition(current.Row, current.Column - 1, triangleSize));
+                builder.Add(new TrianglePosition(current.Row - 1, current.Column - 1, triangleSize));
+            }
+
+            if (hasRight)
+            {
+                builder.Add(new TrianglePosition(current.Row, current.Column + 1, triangleSize));
+                builder.Add(new TrianglePosition(current.Row + 1, current.Column, triangleSize));
+            }
+
+            if (hasBottom)
+            {
+                builder.Add(new TrianglePosition(current.Row - 1, current.Column + 1, triangleSize));
+                builder.Add(new TrianglePosition(current.Row - 1, current.Column, triangleSize));
+            }
+
+            return builder.ToImmutable();
         }
 
         public static TrianglePosition GetTrianglePosition(int initialIndex, int triangleSize)
