@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using CheckContracts;
+using JetBrains.Annotations;
 
 namespace ColorsMagic.Common.GameModel
 {
@@ -69,7 +70,7 @@ namespace ColorsMagic.Common.GameModel
             }
         }
 
-        private ImmutableArray<PortablePoint> Reverse(IEnumerable<PortablePoint> result)
+        private ImmutableArray<PortablePoint> Reverse([NotNull] IEnumerable<PortablePoint> result)
         {
             return result.Select(p => new PortablePoint(p.X, Size.Height - p.Y)).ToImmutableArray();
         }
